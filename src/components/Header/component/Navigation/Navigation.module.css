@@ -1,0 +1,296 @@
+.navigation {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-grow: 1;
+	font-size: clamp(20px, 1.7vw, 24px);
+	font-weight: 500;
+	transition: transform 0.3s ease;
+}
+
+.navigationBack {
+	display: none;
+}
+
+.menu {
+	display: flex;
+	justify-content: space-between;
+	column-gap: clamp(20px, 2vw, 40px);
+}
+
+.menuItem {
+	height: fit-content;
+	border-radius: 5px;
+
+	&:hover {
+		background-color: var(--color-red-primary);
+	}
+}
+
+.itemSubmenu {
+	position: relative;
+}
+
+.navButton {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: clamp(12px, 1.5vw, 20px);
+	padding-right: clamp(12px, 1.5vw, 20px);
+	display: inline-block;
+	line-height: 2.8rem;
+}
+
+.submenuWrap {
+	position: absolute;
+	left: 0;
+	top: 100%;
+	transform: translateY(-10%);
+	opacity: 0;
+	visibility: hidden;
+	background-color: transparent;
+	transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+	z-index: 10;
+}
+
+.submenu {
+	margin-top: 40px;
+	padding: 10px 15px;
+
+	font-size: 1.9rem;
+	white-space: nowrap;
+	background-color: var(--color-gray-dark);
+	border-radius: 12px;
+
+	& .navButton {
+		padding: 6px 0;
+		width: 100%;
+		line-height: 2.5rem;
+
+		&:hover,
+		&:active {
+			color: var(--color-red-secondary);
+		}
+	}
+}
+
+.subMenuOpen {
+	display: block;
+	transform: translateY(0);
+	visibility: inherit;
+	opacity: 1;
+}
+
+.submenuItem {
+	position: relative;
+	width: 100%;
+
+	&:not(:last-child)::before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		display: block;
+		width: 100%;
+		height: 1px;
+		background-color: var(--color-white-90);
+	}
+}
+
+.userActions {
+	display: flex;
+	align-items: center;
+	column-gap: clamp(15px, 2vw, 30px);
+}
+
+.searchWrap {
+	position: relative;
+}
+
+.searchOpen {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: clamp(12px, 1.5vw, 20px);
+	padding-right: clamp(12px, 1.5vw, 20px);
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.searchInputWrap {
+	position: absolute;
+	top: -32px;
+	right: 0;
+	background-color: var(--color-black-100);
+	border-radius: 8px;
+
+	& img {
+		position: absolute;
+		top: 50%;
+		left: 20px;
+		transform: translate(0, -50%);
+		z-index: 10;
+	}
+}
+
+.searchInput {
+	padding: 20px 20px 20px 50px;
+	position: relative;
+	width: 335px;
+	border-radius: 8px;
+	color: white;
+	background-color: var(--color-black-70);
+
+	&::placeholder {
+		color: rgb(85, 83, 83);
+	}
+}
+
+.signIn {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: clamp(12px, 1.5vw, 20px);
+	padding-right: clamp(12px, 1.5vw, 20px);
+}
+
+.profile {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: clamp(12px, 1.5vw, 20px);
+	padding-right: clamp(12px, 1.5vw, 20px);
+}
+
+.profileMenu {
+	display: none;
+}
+
+.profileOut {
+}
+
+@media (max-width: 900px) {
+	.searchOpen {
+		p {
+			display: none;
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.navigation {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		padding-top: 48px;
+		position: absolute;
+		top: 100%;
+		right: 0;
+		transform: translateX(40px);
+		flex-direction: column;
+		align-items: end;
+		max-width: 350px;
+		width: 100%;
+		visibility: hidden;
+		opacity: 0;
+		transition: all 0.3s ease;
+		background-color: var(--color-black-70);
+	}
+
+	.navigationOpen {
+		transform: translateX(0);
+		visibility: visible;
+		opacity: 1;
+		height: 100vh;
+		justify-content: start;
+	}
+
+	.menu {
+		position: relative;
+		flex-direction: column;
+		align-items: end;
+		width: 100%;
+	}
+
+	.menuItem {
+		width: 100%;
+	}
+
+	.navButton {
+		padding: 10px 20px;
+		width: 100%;
+		text-align: right;
+	}
+
+	.itemSubmenu {
+		position: static;
+	}
+
+	.submenuWrap {
+		right: 0;
+		top: 0;
+		transform: translateX(40px);
+		height: 100vh;
+		opacity: 0;
+		visibility: hidden;
+		background-color: var(--color-black-100);
+		transition: all 0.3s ease;
+		z-index: 10;
+	}
+
+	.submenu {
+		margin-top: 0;
+		padding: 0 0;
+		font-size: 2rem;
+		border-radius: 0;
+		background-color: var(--color-black-100);
+
+		& .navButton {
+			padding: 10px 20px;
+			width: 100%;
+			text-align: right;
+		}
+	}
+
+	.subMenuOpen {
+		transform: translateX(0);
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.submenuItem {
+		&:not(:last-child)::before {
+			display: none;
+		}
+	}
+
+	.userActions {
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.searchWrap {
+		padding: 0 20px;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	.searchInputWrap {
+		position: relative;
+		top: 0;
+	}
+
+	.searchInput {
+		padding: 12px 20px 12px 50px;
+		width: 100%;
+		background-color: var(--color-gray-dark);
+	}
+
+	.signIn {
+		width: 100%;
+		text-align: right;
+	}
+
+	.profile {
+		width: 100%;
+		text-align: right;
+	}
+}
