@@ -7,6 +7,7 @@
 	font-size: clamp(20px, 1.7vw, 24px);
 	font-weight: 500;
 	transition: transform 0.3s ease;
+	z-index: 2;
 }
 
 .navigationBack {
@@ -153,18 +154,54 @@
 	padding-right: clamp(12px, 1.5vw, 20px);
 }
 
-.profile {
+.profileButton {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	padding-left: clamp(12px, 1.5vw, 20px);
 	padding-right: clamp(12px, 1.5vw, 20px);
 }
 
-.profileMenu {
-	display: none;
-}
+.profile {
+	position: absolute;
+	top: 178%;
+	right: 0;
+	font-weight: 500;
+	font-size: 1.9rem;
+	line-height: 1.3;
+	text-align: right;
+	border-radius: 1.3rem;
+	background-color: var(--color-gray-dark);
+	z-index: 10;
 
-.profileOut {
+	div {
+		padding: 14px 15px 10px;
+		display: flex;
+		flex-direction: column;
+		gap: 13px;
+		width: 100%;
+
+		a {
+			position: relative;
+			width: 200px;
+		}
+
+		a:not(:last-child)::after {
+			content: '';
+			display: block;
+			position: absolute;
+			bottom: -7px;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			background-color: var(--color-white-90);
+		}
+
+
+		button {
+			width: 200px;
+			text-align: right;
+		}
+	}
 }
 
 @media (max-width: 900px) {
@@ -182,8 +219,7 @@
 		padding-top: 48px;
 		position: absolute;
 		top: 100%;
-		right: 0;
-		transform: translateX(40px);
+		right: 0px;
 		flex-direction: column;
 		align-items: end;
 		max-width: 350px;
@@ -191,11 +227,11 @@
 		visibility: hidden;
 		opacity: 0;
 		transition: all 0.3s ease;
-		background-color: var(--color-black-70);
+		background-color: var(--color-black-90);
+		overflow-x: hidden;
 	}
 
 	.navigationOpen {
-		transform: translateX(0);
 		visibility: visible;
 		opacity: 1;
 		height: 100vh;

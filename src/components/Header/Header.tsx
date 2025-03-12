@@ -1,9 +1,16 @@
-import Navigation from './component/Navigation/Navigation.tsx'
-import logoHeader from '../../assets/logo/logoHeader.png'
-import { MenuItem } from './index.ts'
-import styles from './Header.module.css'
-import ButtonMenu from './component/ButtonMenu/ButtonMenu.tsx'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
+
+import Navigation from './component/Navigation/Navigation.tsx'
+import ButtonMenu from './component/ButtonMenu/ButtonMenu.tsx'
+import SignInWindow from '../SignInWindow/SignInWindow.tsx'
+
+import logoHeader from '../../assets/logo/logoHeader.png'
+
+import styles from './Header.module.css'
+
+import { MenuItem } from './index.ts'
 
 const menuItems: MenuItem[] = [
 	{ name: 'Movies', link: '#' },
@@ -49,6 +56,7 @@ const menuItems: MenuItem[] = [
 
 const Header = () => {
 	const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
+		const isOpenAuthorizationWindow = useSelector((state: RootState) => state.authorizationWindow.isOpen)
 
 	return (
 		<header className={styles.header}>
@@ -58,6 +66,7 @@ const Header = () => {
 			</a>
 			<ButtonMenu isOpen={isOpenMenu} setIsOpen={setOpenMenu} />
 			<Navigation isOpen={isOpenMenu} menu={menuItems} />
+			{isOpenAuthorizationWindow && <SignInWindow />}
 		</header>
 	)
 }

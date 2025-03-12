@@ -1,0 +1,39 @@
+.social {
+	margin-bottom: 55px;
+	display: flex;
+	justify-content: space-between;
+	max-width: 280px;
+}
+
+.socialItem {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 1px solid var(--color-white-100);
+	background-color: transparent;
+
+	&:hover {
+		border: 1px solid var(--color-blue);
+	}
+
+	&:hover .icon,
+	&:active .icon {
+		fill: var(--color-blue);
+	}
+}
+
+.icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	fill: #fff;
+}
+
+@media (max-width: 768px) {
+	.social {
+		margin-bottom: 30px;
+		max-width: 320px;
+	}
+}

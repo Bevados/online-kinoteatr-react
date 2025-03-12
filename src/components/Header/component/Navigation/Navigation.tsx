@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import styles from './Navigation.module.css'
+import SignInButton from '../../../SignInButton/SignInButton.tsx'
 import { MenuItem } from '../../index.ts'
 import search from '../../../../assets/header/search.svg'
 import ButtonSubmenuClose from '../ButtonSubmenuBack/ButtonSubmenuClose.tsx'
+import styles from './Navigation.module.css'
+import { useSelector } from 'react-redux'
+import Profile from '../../../Profile/Profile.tsx'
 
 interface NavigationProps {
 	menu: MenuItem[]
@@ -10,10 +13,11 @@ interface NavigationProps {
 }
 
 const Navigation = ({ menu, isOpen }: NavigationProps) => {
-	const [profile, setProfile] = useState<boolean>(false)
 	const [searchActive, setSearchActive] = useState<boolean>(false)
 	const [submenuActive, setSubmenuActive] = useState<null | string>(null)
+	const [profileMenuIsVisible, setProfileMenuIsVisible] = useState<boolean>(false)
 	const refInput = useRef<HTMLDivElement | null>(null)
+	const isAuthenticated = useSelector((state: { auth: { isAuthenticated: boolean } }) => state.auth.isAuthenticated)
 
 	// Open submenu on click
 	function handleSubmenuClick(name: string) {
@@ -37,7 +41,7 @@ const Navigation = ({ menu, isOpen }: NavigationProps) => {
 			setSearchActive(true)
 		}
 
-		if (!searchActive && !submenuActive) {
+		if (!searchActive && !submenuActive && !isOpen) {
 			return
 		}
 
@@ -64,7 +68,7 @@ const Navigation = ({ menu, isOpen }: NavigationProps) => {
 		return () => {
 			document.removeEventListener('click', handleClickOutside)
 		}
-	}, [searchActive, submenuActive])
+	}, [searchActive, submenuActive, isOpen])
 
 	return (
 		<nav
@@ -94,11 +98,7 @@ const Navigation = ({ menu, isOpen }: NavigationProps) => {
 								className={`${styles.submenuWrap} ${submenuActive === item.name ? styles.subMenuOpen : ''}`}
 								role='menu'
 								aria-hidden={submenuActive !== item.name}>
-								<ButtonSubmenuClose
-									name={item.name}
-									active={submenuActive}
-									setActive={(setSubmenuActive)}
-								/>
+								<ButtonSubmenuClose name={item.name} active={submenuActive} setActive={setSubmenuActive} />
 								<ul className={styles.submenu}>
 									{item.submenu.map(subitem => (
 										<li key={subitem.name} className={styles.submenuItem}>
@@ -145,35 +145,23 @@ const Navigation = ({ menu, isOpen }: NavigationProps) => {
 					)}
 				</div>
 
-				{/* УБрать onClick и состояние  profile*/}
-				{!profile && (
-					<a onClick={() => setProfile(true)} className={styles.signIn} href='#' aria-label='Sign in'>
-						Sign in
-					</a>
-				)}
-
-				{/* УБрать profile*/}
-				{profile && (
-					<button className={styles.profile} type='button' aria-label='Profile'>
+				{!isAuthenticated ? (
+					<SignInButton />
+				) : (
+					<button
+						className={styles.profileButton}
+						onClick={() => {
+							setProfileMenuIsVisible(prew => !prew)
+						}}
+						type='button'
+						aria-label='Profile'>
 						Profile
 					</button>
 				)}
-				<div className={styles.profileMenu} role='menu'>
-					<a href='#' role='menuitem'>
-						Profile
-					</a>
-					<a href='#' role='menuitem'>
-						Plans
-					</a>
-					<a href='#' role='menuitem'>
-						Payment History
-					</a>
 
-					{/* УБрать onClick*/}
-					<button onClick={() => setProfile(false)} className={styles.profileOut} role='menuitem' aria-label='Log out'>
-						Log Out
-					</button>
-				</div>
+				{profileMenuIsVisible && isAuthenticated && (
+					<Profile type='header' className={styles.profile} isVisibleProfileWindow={setProfileMenuIsVisible} />
+				)}
 			</div>
 		</nav>
 	)

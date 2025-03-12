@@ -1,0 +1,54 @@
+.footer {
+	padding: 60px 60px;
+	display: flex;
+	font-size: 1.6rem;
+	line-height: 2.2rem;
+	color: rgba(97, 97, 97, 1);
+	background-color: var(--color-gray-primary);
+
+	h2 {
+		font-size: 2rem;
+		line-height: 1.4;
+		color: var(--color-white-100);
+	}
+
+	@media (max-width: 1100px) {
+		padding: 60px 30px;
+	}
+
+	@media (max-width: 950px) {
+		padding: 60px 20px;
+	}
+}
+
+.wrapProfilePopular {
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+}
+
+.signIn {
+	padding: 0;
+	font-size: 2rem;
+	line-height: 1.4;
+	color: var(--color-white-100);
+}
+
+.profile {
+	display: flex;
+	flex-direction: column;
+	gap: 22px;
+	font-size: 1.8rem;
+	font-weight: 400;
+	line-height: 1.4;
+
+	div {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+
+		a:hover {
+			color: var(--color-red-primary);
+		}
+	}
+}
