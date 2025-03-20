@@ -11,4 +11,10 @@
 		width: 21px;
 		height: 21px;
 	}
+
+	@media (max-width: 768px) {
+		padding: 10px 20px;
+		width: 100%;
+		justify-content: end;
+	}
 }

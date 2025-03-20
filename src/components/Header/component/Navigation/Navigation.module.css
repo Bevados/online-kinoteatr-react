@@ -155,10 +155,9 @@
 }
 
 .profileButton {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: clamp(12px, 1.5vw, 20px);
-	padding-right: clamp(12px, 1.5vw, 20px);
+	padding: 10px 20px;
+	width: 100%;
+	text-align: right;
 }
 
 .profile {
@@ -196,10 +195,24 @@
 			background-color: var(--color-white-90);
 		}
 
-
 		button {
 			width: 200px;
 			text-align: right;
+		}
+	}
+
+	@media (max-width: 768px) {
+		top: 0;
+		height: 100vh;
+
+		div {
+			a {
+				width: 100%;
+			}
+
+			button {
+				width: 100%;
+			}
 		}
 	}
 }

@@ -1,20 +1,109 @@
 .popularVideo {
-}
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	max-width: 280px;
+	min-width: 200px;
+	width: 100%;
+	font-size: 18px;
+	line-height: 1.4;
 
-.titleWrap {
+	@media (max-width: 950px) {
+		gap: 0;
+	}
+
+	@media (max-width: 550px) {
+		max-width: 100%;
+	}
 }
 
 .title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	font-size: clamp(20px, 2vw, 24px);
+	color: var(--color-white-100);
+
+	@media (max-width: 950px) {
+		line-height: 4.8rem;
+	}
 }
 
 .icon {
+	@media (max-width: 950px) {
+		position: relative;
+		display: inline-block;
+		width: 21px;
+		height: 21px;
+		border: 1px solid var(--color-gray-secondary-100);
+		border-radius: 50%;
+		background-color: transparent;
+
+		&::before,
+		&::after {
+			content: '';
+			display: inline-block;
+			position: absolute;
+			background-color: var(--color-white-100);
+			transform: translate(-50%, -50%);
+		}
+		&::before {
+			top: 50%;
+			left: 50%;
+			width: 7px;
+			height: 1px;
+		}
+		&::after {
+			top: 50%;
+			left: 50%;
+			width: 1px;
+			height: 7px;
+		}
+	}
+}
+
+.iconActive {
+	&::after {
+		display: none;
+	}
 }
 
 .listVideoWrap {
-}
-
-.listVideo {
+	transform-origin: top;
+	transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+	overflow: hidden;
 }
 
 .mobileList {
+	margin-top: 0;
+	max-height: 0;
+	transform: scaleY(0);
+	opacity: 0;
+}
+
+.listOpen {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	max-height: 1000px;
+	transform: scaleY(1);
+	opacity: 1;
+}
+
+.listVideo {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+
+	li:hover {
+		color: var(--color-red-primary);
+		cursor: pointer;
+	}
+
+	a {
+		display: inline-block;
+		width: 100%;
+		line-height: 2.8rem;
+	}
 }

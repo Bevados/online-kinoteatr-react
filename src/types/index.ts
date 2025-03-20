@@ -1,4 +1,4 @@
-export interface Movie {
+export interface MoviesSerials {
 	id: string
 	actors: string[]
 	description: string
@@ -12,3 +12,4 @@ export interface Movie {
 	release_date: string
 	title: string
 }
+

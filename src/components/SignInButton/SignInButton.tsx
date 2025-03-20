@@ -6,6 +6,7 @@ import { showComponent } from '../../redux/authorizationWindow/authorizationWind
 
 interface SignInProps {
 	className?: string
+	type?: 'header' | 'footer'
 }
 
 const SignIn = ({ className }: SignInProps) => {

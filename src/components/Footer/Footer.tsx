@@ -9,9 +9,19 @@ import Profile from '../Profile/Profile'
 import { fetchMovies, fetchSerials } from '../../services/fetchData'
 
 import styles from './Footer.module.css'
+import { useEffect, useState } from 'react'
 
 const Footer = () => {
+	const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768)
 	const isAuthenticated = useSelector((state: { auth: { isAuthenticated: boolean } }) => state.auth.isAuthenticated)
+
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth <= 768)
+		}
+		window.addEventListener('resize', handleResize)
+		return () => window.removeEventListener('resize', handleResize)
+	}, [])
 
 	const {
 		data: moviesData = [],
@@ -40,21 +50,47 @@ const Footer = () => {
 			<Company />
 			<div className={styles.wrapProfilePopular}>
 				{!isAuthenticated && <SignInButton className={styles.signIn} />}
-				{isAuthenticated && <Profile className={styles.profile} type='footer' />}
-				<PopularVideo
-					title='Movies'
-					data={moviesData}
-					isLoading={moviesIsLoading}
-					isError={moviesIsError}
-					error={moviesError}
-				/>
-				<PopularVideo
-					title='Series'
-					data={serialsData}
-					isLoading={serialsIsLoading}
-					isError={serialsIsError}
-					error={serialsError}
-				/>
+				{isAuthenticated && <Profile className={styles.profile} type='footer' isMobile={isMobile} />}
+
+				{!isMobile && (
+					<div className={styles.popularVideoWrap}>
+						<PopularVideo
+							title='Movies'
+							data={moviesData}
+							isLoading={moviesIsLoading}
+							isError={moviesIsError}
+							error={moviesError}
+							className={styles.borderLine}
+						/>
+						<PopularVideo
+							title='Series'
+							data={serialsData}
+							isLoading={serialsIsLoading}
+							isError={serialsIsError}
+							error={serialsError}
+						/>
+					</div>
+				)}
+
+				{isMobile && (
+					<>
+						<PopularVideo
+							title='Movies'
+							data={moviesData}
+							isLoading={moviesIsLoading}
+							isError={moviesIsError}
+							error={moviesError}
+							className={styles.borderLine}
+						/>
+						<PopularVideo
+							title='Series'
+							data={serialsData}
+							isLoading={serialsIsLoading}
+							isError={serialsIsError}
+							error={serialsError}
+						/>
+					</>
+				)}
 			</div>
 		</footer>
 	)
