@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 
@@ -13,6 +12,3 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 export const db = getFirestore(app)
-=======
-
->>>>>>> e27ebfd10c6f4c3d44aa8b830c4f74e56ea1b156
