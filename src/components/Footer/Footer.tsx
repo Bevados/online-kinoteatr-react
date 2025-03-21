@@ -61,6 +61,7 @@ const Footer = () => {
 							isError={moviesIsError}
 							error={moviesError}
 							className={styles.borderLine}
+							dataAuthenticated={isAuthenticated}
 						/>
 						<PopularVideo
 							title='Series'
@@ -68,6 +69,7 @@ const Footer = () => {
 							isLoading={serialsIsLoading}
 							isError={serialsIsError}
 							error={serialsError}
+							dataAuthenticated={isAuthenticated}
 						/>
 					</div>
 				)}
@@ -81,6 +83,7 @@ const Footer = () => {
 							isError={moviesIsError}
 							error={moviesError}
 							className={styles.borderLine}
+							dataAuthenticated={isAuthenticated}
 						/>
 						<PopularVideo
 							title='Series'
@@ -88,6 +91,7 @@ const Footer = () => {
 							isLoading={serialsIsLoading}
 							isError={serialsIsError}
 							error={serialsError}
+							dataAuthenticated={isAuthenticated}
 						/>
 					</>
 				)}

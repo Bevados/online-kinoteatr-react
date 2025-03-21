@@ -54,20 +54,31 @@
 
 .signIn {
 	padding: 0;
-	max-width: 290px;
+	max-width: 200px;
 	min-width: 140px;
 	width: 100%;
 	font-size: 1.8rem;
 	font-weight: 400;
 	line-height: 1.4;
 	color: var(--color-white-100);
+
+	@media (max-width: 950px) {
+		max-width: 150px;
+	}
+
+	@media (max-width: 768px) {
+		max-width: inherit;
+		line-height: 4.8rem;
+		justify-content: start;
+		border-bottom: 1px solid var(--color-gray-secondary-100);
+	}
 }
 
 .profile {
 	display: flex;
 	flex-direction: column;
 	gap: 22px;
-	max-width: 290px;
+	max-width: 250px;
 	min-width: 140px;
 	width: 100%;
 	font-size: 1.8rem;
@@ -156,18 +167,14 @@
 	}
 
 	@media (max-width: 950px) {
-		gap: 0;
 		width: 45%;
 	}
 
 	@media (max-width: 768px) {
-		max-width: 280px;
+		gap: 0;
+		max-width: inherit;
 		width: 100%;
 		border-bottom: 1px solid var(--color-gray-secondary-100);
-	}
-
-	@media (max-width: 550px) {
-		max-width: 100%;
 	}
 }
 

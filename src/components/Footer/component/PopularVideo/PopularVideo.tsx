@@ -11,16 +11,10 @@ interface PopularVideoProps {
 	isError?: boolean
 	error?: Error | null
 	className?: string
-	}
+	dataAuthenticated: boolean
+}
 
-const PopularVideo = ({
-	title,
-	data,
-	isLoading,
-	isError,
-	error,
-	className,
-}: PopularVideoProps) => {
+const PopularVideo = ({ title, data, isLoading, isError, error, className, dataAuthenticated }: PopularVideoProps) => {
 	const [filtredData, setFiltredData] = useState<[] | MoviesSerials[]>([])
 	const [mobile, setMobile] = useState<boolean>(window.innerWidth <= 950)
 	const [openList, setOpenList] = useState<boolean>(false)
@@ -44,7 +38,7 @@ const PopularVideo = ({
 	}, [data])
 
 	return (
-		<div className={`${styles.popularVideo} ${className}`}>
+		<div className={`${styles.popularVideo} ${className}`} data-authenticated={dataAuthenticated}>
 			<button
 				className={styles.title}
 				onClick={() => {
