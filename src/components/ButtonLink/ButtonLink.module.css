@@ -1,0 +1,8 @@
+.button {
+	padding: clamp(10px, 1vw, 15px) clamp(30px, 3vw, 35px);
+	display: inline-block;
+	font-size: clamp(16px, 2vw, 24px);
+	font-weight: 500;
+	background-color: var(--color-red-primary);
+	border-radius: 60px;
+}
