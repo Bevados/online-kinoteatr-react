@@ -1,17 +1,79 @@
 .control {
+
+	padding: clamp(14px, 1.5vw, 24px) clamp(85px, 8.5vw, 152px);
+	position: absolute;
+	left: 50%;
+	bottom: clamp(20px, 3vw, 50px);
+	transform: translateX(-50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: clamp(10px, 1vw, 15px);
+
+	@media (max-width: 768px) {
+		position: relative;
+		left: 0;
+		bottom: 0;
+		transform: translateX(0);
+
+	}
 }
 
 .button {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: clamp(29px, min(3vw, 52px), 52px);
+	height: clamp(29px, min(3vw, 52px), 52px);
+	background-color: transparent;
+	border: 2px solid var(--color-white-100);
+	border-radius: 50%;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: clamp(7px, 30%, 15px);
+		height: clamp(1px, 0.2vw, 2px);
+		background-color: var(--color-white-100);
+	}
 }
 
 .buttonBack {
+	left: 0;
+
+	&::before {
+		transform: translate(-50%, clamp(3px, 0.3vw, 4px)) rotate(45deg);
+	}
+	&::after {
+		transform: translate(-50%, calc(-1 * clamp(3px, 0.3vw, 4px))) rotate(-45deg);
+	}
 }
 
-.ahead {
+.buttonAhead {
+	right: 0;
+
+	&::before {
+		transform: translate(-50%, clamp(3px, 0.3vw, 4px)) rotate(-45deg);
+	}
+	&::after {
+		transform: translate(-50%, calc(-1 * clamp(3px, 0.3vw, 4px))) rotate(45deg);
+	}
 }
 
 .dash {
+	width: clamp(25px, 3vw, 46px);
+	height: clamp(2px, 0.3vw, 4px);
+	background-color: var(--color-white-gray-30);
+
+	@media (max-width: 768px) {
+		width: 25px;
+		height: 2px;
+	}
 }
 
 .activeDash {
+	background-color: var(--color-white-100);
 }

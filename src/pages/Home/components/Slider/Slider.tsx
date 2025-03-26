@@ -65,7 +65,7 @@ const Slider = () => {
 		return () => {
 			clearInterval(interval)
 		}
-	}, [])
+	}, [currentIndex])
 
 	return (
 		<section className={styles.slider}>
@@ -85,7 +85,13 @@ const Slider = () => {
 					/>
 				))}
 			</div>
-			<Control dataLength={sliderData.length} />
+			<Control
+				dataLength={sliderData.length}
+				index={currentIndex}
+				setIndex={setCurrentIndex}
+				isLastSlide={isLastSlide}
+				setIsLastSlide={setIsLastSlide}
+			/>
 		</section>
 	)
 }
