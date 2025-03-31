@@ -1,5 +1,4 @@
 .control {
-
 	padding: clamp(14px, 1.5vw, 24px) clamp(85px, 8.5vw, 152px);
 	position: absolute;
 	left: 50%;
@@ -15,7 +14,11 @@
 		left: 0;
 		bottom: 0;
 		transform: translateX(0);
+	}
 
+	@media (max-width: 350px) {
+		padding: 14px 20px;
+		width: 100%;
 	}
 }
 
@@ -50,6 +53,10 @@
 	&::after {
 		transform: translate(-50%, calc(-1 * clamp(3px, 0.3vw, 4px))) rotate(-45deg);
 	}
+
+	@media (max-width: 350px) {
+		left: 20px;
+	}
 }
 
 .buttonAhead {
@@ -61,9 +68,13 @@
 	&::after {
 		transform: translate(-50%, calc(-1 * clamp(3px, 0.3vw, 4px))) rotate(45deg);
 	}
+
+	@media (max-width: 350px) {
+		right: 20px;
+	}
 }
 
-.dash {
+/* .dash {
 	width: clamp(25px, 3vw, 46px);
 	height: clamp(2px, 0.3vw, 4px);
 	background-color: var(--color-white-gray-30);
@@ -76,4 +87,36 @@
 
 .activeDash {
 	background-color: var(--color-white-100);
+} */
+
+.dash {
+	position: relative;
+	width: clamp(25px, 3vw, 46px);
+	height: clamp(2px, 0.3vw, 4px);
+	background-color: var(--color-white-gray-30);
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 0;
+		height: 100%;
+		transition: width 3s;
+		background-color: var(--color-white-100);
+	}
+
+	&.activeDash::after {
+		width: 100%;
+	}
+
+	&.resetDash::after {
+		transition: none;
+		width: 0;
+	}
+
+	@media (max-width: 768px) {
+		width: 25px;
+		height: 2px;
+	}
 }

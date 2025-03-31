@@ -10,7 +10,7 @@ interface ControlProps {
 
 const Control = ({ dataLength, index, setIndex, setIsLastSlide, isLastSlide }: ControlProps) => {
 	const dash = Array.from({ length: dataLength }, (_, i) => (
-		<span key={i} className={`${styles.dash} ${index === i && styles.activeDash}`}></span>
+		<span key={i} className={`${styles.dash} ${index === i ? styles.activeDash : styles.resetDash}`}></span>
 	))
 
 	const handleLastSlide = (action: string) => {
