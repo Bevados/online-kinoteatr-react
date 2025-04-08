@@ -1,7 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMoviePreviews } from '../../../../hooks/useMoviePreviews'
 import styles from './VideoList.module.css'
-import { fetchMovies } from '../../../../services/fetchData'
-
 
 interface VideoListProps {
 	type: 'recommended channels' | 'new channels' | 'new movies' | 'popular movies' | 'popular serials'
@@ -9,15 +7,9 @@ interface VideoListProps {
 }
 
 const VideoList = ({ type, url }: VideoListProps) => {
+	const { data } = useMoviePreviews()
 
-
-	const { data } = useQuery({
-		queryKey: ['movies'],
-		queryFn: fetchMovies
-	})
-
-
-	console.log(data);
+	console.log(data)
 
 	return (
 		<section className={styles.videosContainer}>
