@@ -1,7 +1,7 @@
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../firebase'
 
-import { MoviesSerials } from '../types'
+import { Movies, Serials } from '../types'
 
 export const fetchMovies = async () => {
 	try {
@@ -9,7 +9,7 @@ export const fetchMovies = async () => {
 		if (querySnapshot.empty) {
 			throw new Error('Фильмы не найдены')
 		}
-		const movies = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as MoviesSerials))
+		const movies = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Movies))
 		return movies
 	} catch (error) {
 		console.error('Ошибка загрузки фильмов:', error)
@@ -27,7 +27,7 @@ export const fetchSerials = async () => {
 		if (querySnapshot.empty) {
 			throw new Error('Сериалы не найдены')
 		}
-		const serials = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as MoviesSerials))
+		const serials = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Serials))
 		return serials
 	} catch (error) {
 		console.error('Ошибка загрузки сериалов:', error)
