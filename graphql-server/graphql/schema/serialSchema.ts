@@ -1,14 +1,15 @@
 import { gql } from 'apollo-server'
 
-export const movieTypeDefs = gql`
-	type MoviePreview {
+export const serialTypeDefs = gql`
+	type SerialPreview {
 		id: ID!
 		title: String!
 		poster_url: String!
 		duration: String!
+		episodes: Int!
 	}
 
 	type Query {
-		moviePreviews: [MoviePreview!]!
+		serialPreviews: [SerialPreview!]!
 	}
 `

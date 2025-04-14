@@ -1,10 +1,10 @@
 import admin from 'firebase-admin'
 
-export const movieResolvers = {
+export const serialResolvers = {
 	Query: {
-		moviePreviews: async () => {
+		serialPreviews: async () => {
 			const db = admin.firestore()
-			const snapshot = await db.collection('movies').get()
+			const snapshot = await db.collection('serials').get()
 
 			return snapshot.docs.map(doc => {
 				const data = doc.data()
@@ -12,10 +12,10 @@ export const movieResolvers = {
 					id: doc.id,
 					title: data.title,
 					poster_url: data.poster_url,
-					duration: data.duration
+					duration: data.duration,
+					episodes: data.episodes
 				}
 			})
 		}
 	}
 }
-

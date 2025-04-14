@@ -1,0 +1,23 @@
+.wrap {
+
+
+	/* &:hover{
+		transform: scale(2);
+	} */
+}
+
+.poster {
+	min-width: 111px;
+	max-width: 231px;
+	width: clamp(111px, 20vw, 231px);
+	height: auto;
+	object-fit: cover;
+	scroll-snap-align: start;
+}
+
+.description {
+	display: none;
+}
+
+.title {
+}

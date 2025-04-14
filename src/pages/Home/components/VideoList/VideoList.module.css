@@ -1,3 +1,16 @@
 .videosContainer {
-	
+}
+
+.videos {
+	padding: 16px;
+	display: flex;
+	gap: clamp(5px, 1.5vw, 25px);
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }

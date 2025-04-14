@@ -1,23 +1,48 @@
-import { useMoviePreviews } from '../../../../hooks/useMoviePreviews'
+import { UseQueryResult } from '@tanstack/react-query'
 import styles from './VideoList.module.css'
+import Video from '../../../../components/Video/Video'
+import Channel from '../../../../components/Channel/Channel'
 
-interface VideoListProps {
-	type: 'recommended channels' | 'new channels' | 'new movies' | 'popular movies' | 'popular serials'
+import { MoviesPreviews, SerialsPreviews } from '../../../../types//index'
+
+interface VideoListProps<T> {
+	title: string
 	url?: string
+	queryFunction: () => UseQueryResult<T[]>
+	type: 'movies' | 'serials' | 'channels'
 }
 
-const VideoList = ({ type, url }: VideoListProps) => {
-	const { data } = useMoviePreviews()
-
-	console.log(data)
+const VideoList = <T extends MoviesPreviews | SerialsPreviews>({
+	title,
+	url,
+	queryFunction,
+	type
+}: VideoListProps<T>) => {
+	const { data = [], error, isError } = queryFunction()
 
 	return (
 		<section className={styles.videosContainer}>
 			<div className={styles.header}>
-				<h2 className={styles.title}>{type.replace(/\b\w/g, char => char.toUpperCase())}</h2>
+				<h2 className={styles.title}>{title.replace(/\b\w/g, char => char.toUpperCase())}</h2>
 				{url && <a className={styles.url} href={url}></a>}
 			</div>
-			<div className={styles.videos}></div>
+			<div className={styles.videos}>
+				{isError && <div className={styles.error}>{error.message}</div>}
+
+				{data.map(item => {
+					if (type === 'movies') {
+						return <Video key={item.id} data={item as MoviesPreviews} />
+					}
+
+					if (type === 'serials') {
+						return <Video key={item.id} data={item as SerialsPreviews} />
+					}
+
+					if (type === 'channels') {
+						return <Channel key={item.id} />
+					}
+				})}
+			</div>
 		</section>
 	)
 }

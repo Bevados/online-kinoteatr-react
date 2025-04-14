@@ -27,3 +27,18 @@ export interface Serials {
 	title: string
 	episodes: number
 }
+
+export interface MoviesPreviews {
+	id: string
+	duration: string
+	poster_url: string
+	title: string
+}
+
+export interface SerialsPreviews {
+	id: string
+	duration: string
+	episodes: number
+	title: string
+	poster_url: string
+}
