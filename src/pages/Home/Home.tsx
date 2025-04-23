@@ -14,17 +14,9 @@ const Home = () => {
 		<>
 			<Slider />
 			<div className={styles.videoWrap}>
-				<VideoList<MoviesPreviews>
-					title='new movies'
-					queryFunction={useMoviePreviews}
-					type='movies'
-				/>
+				<VideoList<MoviesPreviews> title='new movies' queryFunction={useMoviePreviews} type='movies' url='#' />
 
-				<VideoList<SerialsPreviews>
-					title='new serials'
-					queryFunction={useSerialPreviews}
-					type='movies'
-				/>
+				<VideoList<SerialsPreviews> title='new serials' queryFunction={useSerialPreviews} type='movies' url='#' />
 			</div>
 		</>
 	)

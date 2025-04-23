@@ -1,9 +1,7 @@
 .videoWrap {
-	width: 100%;
-}
-
-.header {
-}
-
-.url {
+	padding: 80px 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 80px;
+	max-width: 1920px;
 }

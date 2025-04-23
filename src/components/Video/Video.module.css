@@ -1,18 +1,14 @@
-.wrap {
-
-
-	/* &:hover{
-		transform: scale(2);
-	} */
+.previewWrap {
+	display: flex;
+	flex: 0 0 clamp(111px, 20vw, 231px);
+	height: auto;
+	scroll-snap-align: center;
 }
 
 .poster {
-	min-width: 111px;
-	max-width: 231px;
-	width: clamp(111px, 20vw, 231px);
+	width: 100%;
 	height: auto;
 	object-fit: cover;
-	scroll-snap-align: start;
 }
 
 .description {

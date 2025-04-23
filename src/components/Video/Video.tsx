@@ -19,11 +19,12 @@ type VideoData = MovieProps | SerialProps
 
 interface VideoProps {
 	data: VideoData
+	myRef?: (el: HTMLDivElement | null) => void
 }
 
-const Video = ({ data }: VideoProps) => {
+const Video = ({ data, myRef }: VideoProps) => {
 	return (
-		<div className={styles.wrap}>
+		<div className={styles.previewWrap} ref={myRef}>
 			<img src={data.poster_url} alt={data.title} className={styles.poster} />
 			<div className={styles.description}>
 				<h2 className={styles.title}>{data.title}</h2>
