@@ -64,6 +64,7 @@ const VideoList = <T extends MoviesPreviews | SerialsPreviews>({
 		setWidthVideoItem(width || 0)
 	}
 
+	// Отслеживание изменения ширины блока с видео и элемента видео
 	useEffect(() => {
 		if (!data.length) return
 
