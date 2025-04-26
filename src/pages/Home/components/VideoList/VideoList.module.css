@@ -57,14 +57,12 @@
 }
 
 .videosWrap {
-	padding: 0 clamp(12px, 3.5vw, 65px);
 	position: relative;
 }
 
-.videos {
-	display: flex;
-	gap: clamp(5px, 1.5vw, 25px);
-	overflow-x: scroll;
+.videosInner {
+	margin: 0 clamp(12px, 3.5vw, 65px);
+	overflow: hidden;
 	scroll-snap-type: x mandatory;
 	scrollbar-width: none;
 	-ms-overflow-style: none;
@@ -72,6 +70,15 @@
 	&::-webkit-scrollbar {
 		display: none;
 	}
+
+	@media (max-width: 768px) {
+		overflow-x: scroll;
+	}
+}
+
+.videos {
+	display: flex;
+	gap: clamp(5px, 1.5vw, 25px);
 }
 
 .leaf {
@@ -87,14 +94,16 @@
 	border-radius: 12px 0 0 12px;
 	z-index: 2;
 
-	@media(max-width: 768px) {
+	@media (max-width: 768px) {
 		display: none;
 	}
 }
 
 .back {
 	left: 0;
+	border-radius: 0 12px 12px 0;
 }
 .ahead {
 	right: 0;
+	border-radius: 12px 0 0 12px;
 }
