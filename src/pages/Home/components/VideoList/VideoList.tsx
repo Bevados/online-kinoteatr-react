@@ -26,7 +26,7 @@ const VideoList = <T extends MoviesPreviews | SerialsPreviews>({
 	const [widthVisibleVideosBlock, setWidthVisibleVideosBlock] = useState<number>(0)
 	const [transformVideoContainer, setTransformVideoContainer] = useState<number>(0)
 
-	// console.log(widthVideosBlock)
+	const maxValueScrollVideosBlock = widthVideosBlock - widthVisibleVideosBlock
 
 	const videoRef = useRef<HTMLDivElement | null>(null)
 	const videosRef = useRef<HTMLDivElement | null>(null)
@@ -102,8 +102,8 @@ const VideoList = <T extends MoviesPreviews | SerialsPreviews>({
 
 	//Прокрутка блока с видео вправо при нажатии на кнопку
 	function handleLeafAhead() {
-		if (transformVideoContainer + widthVideoItem >= widthVideosBlock - widthVisibleVideosBlock) {
-			setTransformVideoContainer(widthVideosBlock - widthVisibleVideosBlock)
+		if (transformVideoContainer + widthVideoItem >= maxValueScrollVideosBlock) {
+			setTransformVideoContainer(maxValueScrollVideosBlock)
 		} else {
 			setTransformVideoContainer(prev => prev + widthVideoItem)
 		}
@@ -123,9 +123,9 @@ const VideoList = <T extends MoviesPreviews | SerialsPreviews>({
 				{isError && <div className={styles.error}>{error.message}</div>}
 
 				<button
+					data-hidden={transformVideoContainer <= 0}
 					className={`${styles.leaf} ${styles.back}`}
-					onClick={handleLeafBack}
-					disabled={transformVideoContainer <= 0}>
+					onClick={handleLeafBack}>
 					Пролистать назад
 				</button>
 
@@ -178,9 +178,9 @@ const VideoList = <T extends MoviesPreviews | SerialsPreviews>({
 				</div>
 
 				<button
+					data-hidden={transformVideoContainer >= widthVideosBlock - widthVisibleVideosBlock}
 					className={`${styles.leaf} ${styles.ahead}`}
-					onClick={handleLeafAhead}
-					disabled={transformVideoContainer >= widthVideosBlock - widthVisibleVideosBlock}>
+					onClick={handleLeafAhead}>
 					Пролистать вперед
 				</button>
 			</div>
