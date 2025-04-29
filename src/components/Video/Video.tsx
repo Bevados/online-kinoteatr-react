@@ -23,6 +23,7 @@ interface VideoProps {
 }
 
 const Video = ({ data, myRef }: VideoProps) => {
+
 	return (
 		<div className={styles.previewWrap} ref={myRef}>
 			<img src={data.poster_url} alt={data.title} className={styles.poster} />

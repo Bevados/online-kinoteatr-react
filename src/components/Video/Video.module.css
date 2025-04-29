@@ -1,8 +1,25 @@
 .previewWrap {
+	position: relative;
 	display: flex;
-	flex: 0 0 clamp(111px, 20vw, 231px);
+	flex: 1 0 clamp(111px, 20vw, 231px);
 	height: auto;
+	cursor: pointer;
 	scroll-snap-align: center;
+	transition: transform 0.3s ease-in-out;
+
+	@media (hover: hover) {
+		&:hover {
+			transform: scale(1.1);
+
+			& .description {
+				display: block;
+			}
+		}
+	}
+
+	@media (max-width: 768px) {
+		transition: none;
+	}
 }
 
 .poster {
@@ -12,6 +29,11 @@
 }
 
 .description {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 30%;
 	display: none;
 }
 
