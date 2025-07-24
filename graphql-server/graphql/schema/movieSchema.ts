@@ -6,9 +6,16 @@ export const movieTypeDefs = gql`
 		title: String!
 		poster_url: String!
 		duration: String!
+		is_popular: Boolean
+		is_new: Boolean
+	}
+
+	input MovieFilter {
+		is_popular: Boolean
+		is_new: Boolean
 	}
 
 	type Query {
-		moviePreviews: [MoviePreview!]!
+		moviePreviews(filter: MovieFilter): [MoviePreview!]!
 	}
 `

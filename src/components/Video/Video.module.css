@@ -4,6 +4,7 @@
 	flex: 1 0 clamp(111px, 20vw, 231px);
 	height: auto;
 	cursor: pointer;
+	overflow: hidden;
 	scroll-snap-align: center;
 	transition: transform 0.3s ease-in-out;
 
@@ -12,7 +13,7 @@
 			transform: scale(1.1);
 
 			& .description {
-				display: block;
+				transform: translateY(0);
 			}
 		}
 	}
@@ -29,13 +30,38 @@
 }
 
 .description {
+	padding: clamp(1rem, 1.5vw, 2rem) clamp(0.75rem, 1.5vw, 1.5rem);
 	position: absolute;
 	bottom: 0;
 	left: 0;
+	transform: translateY(100%);
+	display: flex;
+	flex-direction: column;
+	gap: clamp(0.6rem, 1vw, 1.2rem);
 	width: 100%;
-	height: 30%;
-	display: none;
+	font-size: clamp(1rem, 1.4vw, 1.6rem);
+	line-height: 1;
+	box-sizing: border-box;
+	background-color: var(--color-black-70);
+	transition: transform 0.3s ease-in-out;
+	overflow: hidden;
 }
 
 .title {
+	font-size: clamp(1.2rem, 1.6vw, 1.8rem);
+	line-height: 1.2;
+}
+
+.duration {
+	font-weight: 300;
+
+	& span {
+		font-weight: 700;
+	}
+}
+
+.watchNow {
+	padding: clamp(4px, 1vw, 8px) clamp(15px, 3vw, 20px);
+	width: fit-content;
+	font-size: clamp(1rem, 1.4vw, 1.6rem);
 }

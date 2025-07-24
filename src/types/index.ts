@@ -28,17 +28,33 @@ export interface Serials {
 	episodes: number
 }
 
-export interface MoviesPreviews {
+export interface MoviePreviews {
 	id: string
 	duration: string
 	poster_url: string
 	title: string
+	is_new: boolean
+	is_popular: boolean
 }
 
-export interface SerialsPreviews {
+export interface SerialPreviews {
 	id: string
 	duration: string
 	episodes: number
 	title: string
 	poster_url: string
+	is_new: boolean
+	is_popular: boolean
+}
+
+export interface ChanelPreview {
+	id: string
+	description: string
+	logo: string
+	name: string
+	is_new: boolean
+	nowFilmPoster: string
+	is_recommended: boolean
+	showingNow: string
+	upNext: string
 }

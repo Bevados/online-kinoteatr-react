@@ -7,9 +7,16 @@ export const serialTypeDefs = gql`
 		poster_url: String!
 		duration: String!
 		episodes: Int!
+		is_popular: Boolean
+		is_new: Boolean
+	}
+
+	input SerialFilter {
+		is_popular: Boolean
+		is_new: Boolean
 	}
 
 	type Query {
-		serialPreviews: [SerialPreview!]!
+		serialPreviews(filter: SerialFilter): [SerialPreview!]!
 	}
 `

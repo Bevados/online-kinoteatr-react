@@ -56,7 +56,7 @@ const menuItems: MenuItem[] = [
 
 const Header = () => {
 	const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
-		const isOpenAuthorizationWindow = useSelector((state: RootState) => state.authorizationWindow.isOpen)
+	const isOpenAuthorizationWindow = useSelector((state: RootState) => state.authorizationWindow.isOpen)
 
 	return (
 		<header className={styles.header}>

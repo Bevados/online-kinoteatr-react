@@ -1,26 +1,25 @@
 import { useEffect, useRef, useState } from 'react'
-import { UseQueryResult } from '@tanstack/react-query'
 
 import Video from '../../../../components/Video/Video'
 import Channel from '../../../../components/Channel/Channel'
 
-import { MoviesPreviews, SerialsPreviews } from '../../../../types//index'
+import { MoviePreviews, SerialPreviews } from '../../../../types/index'
 
 import styles from './VideoList.module.css'
 
-interface VideoListProps<T> {
+interface VideoListProps {
 	title: string
 	url?: string
-	queryFunction: () => UseQueryResult<T[]>
+	data: (MoviePreviews | SerialPreviews)[]
 	type: 'movies' | 'serials' | 'channels'
 }
 
-const VideoList = <T extends MoviesPreviews | SerialsPreviews>({
+const VideoList = ({
 	title,
 	url,
-	queryFunction,
+	data,
 	type
-}: VideoListProps<T>) => {
+}: VideoListProps) => {
 	const [widthVideoItem, setWidthVideoItem] = useState<number>(0)
 	const [widthVideosBlock, setWidthVideosBlock] = useState<number>(0)
 	const [widthVisibleVideosBlock, setWidthVisibleVideosBlock] = useState<number>(0)
@@ -30,8 +29,6 @@ const VideoList = <T extends MoviesPreviews | SerialsPreviews>({
 
 	const videoRef = useRef<HTMLDivElement | null>(null)
 	const videosRef = useRef<HTMLDivElement | null>(null)
-
-	const { data = [], error, isError } = queryFunction()
 
 	// Расчет видимой и не видимой ширины блока с видео
 	function calculateWidthVideosBlock() {
@@ -119,9 +116,8 @@ const VideoList = <T extends MoviesPreviews | SerialsPreviews>({
 					</a>
 				)}
 			</div>
-			<div className={styles.videosWrap}>
-				{isError && <div className={styles.error}>{error.message}</div>}
 
+			<div className={styles.videosWrap}>
 				<button
 					data-hidden={transformVideoContainer <= 0}
 					className={`${styles.leaf} ${styles.back}`}
@@ -142,7 +138,7 @@ const VideoList = <T extends MoviesPreviews | SerialsPreviews>({
 								return (
 									<Video
 										key={item.id}
-										data={item as MoviesPreviews}
+										data={item as MoviePreviews}
 										myRef={
 											index === 0
 												? (el: HTMLDivElement | null) => {
@@ -158,7 +154,7 @@ const VideoList = <T extends MoviesPreviews | SerialsPreviews>({
 								return (
 									<Video
 										key={item.id}
-										data={item as SerialsPreviews}
+										data={item as SerialPreviews}
 										myRef={
 											index === 0
 												? (el: HTMLDivElement | null) => {
