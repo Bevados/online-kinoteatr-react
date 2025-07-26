@@ -1,7 +1,7 @@
 .previewWrap {
 	position: relative;
 	display: flex;
-	flex: 1 0 clamp(111px, 20vw, 231px);
+	flex: 0 0 clamp(111px, 20vw, 231px);
 	height: auto;
 	cursor: pointer;
 	overflow: hidden;
@@ -13,7 +13,7 @@
 			transform: scale(1.1);
 
 			& .description {
-				transform: translateY(0);
+				transform: translateY(1%);
 			}
 		}
 	}
