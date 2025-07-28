@@ -12,14 +12,10 @@ interface VideoListProps {
 	url?: string
 	data: (MoviePreviews | SerialPreviews)[]
 	type: 'movies' | 'serials' | 'channels'
+	loading: boolean
 }
 
-const VideoList = ({
-	title,
-	url,
-	data,
-	type
-}: VideoListProps) => {
+const VideoList = ({ title, url, data, type, loading }: VideoListProps) => {
 	const [widthVideoItem, setWidthVideoItem] = useState<number>(0)
 	const [widthVideosBlock, setWidthVideosBlock] = useState<number>(0)
 	const [widthVisibleVideosBlock, setWidthVisibleVideosBlock] = useState<number>(0)
@@ -110,7 +106,7 @@ const VideoList = ({
 		<section className={styles.videosContainer}>
 			<div className={styles.header}>
 				<h2 className={styles.title}>{title.replace(/\b\w/g, char => char.toUpperCase())}</h2>
-				{url && (
+				{url && data.length > 0 && (
 					<a className={styles.url} href={url}>
 						View all
 					</a>
@@ -126,51 +122,57 @@ const VideoList = ({
 				</button>
 
 				<div className={styles.videosInner}>
-					<div
-						className={styles.videos}
-						style={{
-							transform: `translateX(-${transformVideoContainer}px)`,
-							transition: 'transform 0.5s ease'
-						}}
-						ref={videosRef}>
-						{data.map((item, index) => {
-							if (type === 'movies') {
-								return (
-									<Video
-										key={item.id}
-										data={item as MoviePreviews}
-										myRef={
-											index === 0
-												? (el: HTMLDivElement | null) => {
-														videoRef.current = el
-												  }
-												: undefined
-										}
-									/>
-								)
-							}
+					{!loading && data.length === 0 && (
+						<p>{type === 'movies' ? 'Список фильмов сейчас не доступен' : 'Список сериалов сейчас не доступен'}</p>
+					)}
 
-							if (type === 'serials') {
-								return (
-									<Video
-										key={item.id}
-										data={item as SerialPreviews}
-										myRef={
-											index === 0
-												? (el: HTMLDivElement | null) => {
-														videoRef.current = el
-												  }
-												: undefined
-										}
-									/>
-								)
-							}
+					{data.length > 0 && (
+						<div
+							className={styles.videos}
+							style={{
+								transform: `translateX(-${transformVideoContainer}px)`,
+								transition: 'transform 0.5s ease'
+							}}
+							ref={videosRef}>
+							{data.map((item, index) => {
+								if (type === 'movies') {
+									return (
+										<Video
+											key={item.id}
+											data={item as MoviePreviews}
+											myRef={
+												index === 0
+													? (el: HTMLDivElement | null) => {
+															videoRef.current = el
+													  }
+													: undefined
+											}
+										/>
+									)
+								}
 
-							if (type === 'channels') {
-								return <Channel key={item.id} />
-							}
-						})}
-					</div>
+								if (type === 'serials') {
+									return (
+										<Video
+											key={item.id}
+											data={item as SerialPreviews}
+											myRef={
+												index === 0
+													? (el: HTMLDivElement | null) => {
+															videoRef.current = el
+													  }
+													: undefined
+											}
+										/>
+									)
+								}
+
+								if (type === 'channels') {
+									return <Channel key={item.id} />
+								}
+							})}
+						</div>
+					)}
 				</div>
 
 				<button

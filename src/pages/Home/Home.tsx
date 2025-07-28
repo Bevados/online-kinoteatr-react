@@ -12,9 +12,9 @@ import { useMemo } from 'react'
 
 const Home = () => {
 	// Делаю запросы для получения превью фильмов и сериалов
-	const { data: dataMoviesPrev = [], isError: movieIsError, error: movieError } = useMoviePreviews()
-	const { data: dataSerialsPrev = [], isError: serialIsError, error: serialError } = useSerialPreviews()
-	const { data: dataChanelPrev = [], isError: chanelIsError, error: chanelError } = useChannelPreviews()
+	const { data: dataMoviesPrev = [], isError: movieIsError, isLoading: loadingMovies } = useMoviePreviews()
+	const { data: dataSerialsPrev = [], isError: serialIsError, isLoading: loadingSerials } = useSerialPreviews()
+	const { data: dataChanelPrev = [], isError: chanelIsError, isLoading: loadingChannels } = useChannelPreviews()
 
 	// Фильтрую и мемоизирую данные для новых и популярных фильмов, сериалов и каналов
 	const { newMovies, popularMovies } = useMemo(
@@ -41,38 +41,33 @@ const Home = () => {
 		[dataChanelPrev]
 	)
 
-	// Блок с ошибкой
-	const movieErrorBlock = (
-		<div className={styles.error}>{movieError?.message ?? <p>Произошла ошибка загрузки фильмов</p>}</div>
-	)
-	const serialErrorBlock = (
-		<div className={styles.error}>{serialError?.message ?? <p>Произошла ошибка загрузки сериалов</p>}</div>
-	)
-	const chanelErrorBlock = <div className={styles.error}>{chanelError?.message ?? <p>Произошла ошибка каналов</p>}</div>
 
-	console.log(newChanels, popularChanels, chanelErrorBlock, chanelIsError)
+
+	console.log(newChanels, popularChanels, chanelIsError)
 
 	return (
 		<>
 			<Slider />
 			<div className={styles.videoWrap}>
-				{movieIsError
-					? movieErrorBlock
-					: newMovies.length > 0 && <VideoList title='new movies' type='movies' url='#' data={newMovies} />}
+				{loadingMovies && loadingSerials && loadingChannels && <p>Загрузка...</p>}
 
-				{movieIsError
-					? movieErrorBlock
-					: popularMovies.length > 0 && <VideoList title='popular movies' type='movies' url='#' data={popularMovies} />}
+				{movieIsError && serialIsError && chanelIsError && <p>Произошла ошибка загрузки данных</p>}
 
-				{serialIsError
-					? serialErrorBlock
-					: newSerials.length > 0 && <VideoList title='new serials' type='serials' url='#' data={newSerials} />}
+				{!movieIsError && !loadingMovies && (
+					<VideoList title='new movies' type='movies' url='#' data={newMovies} loading={loadingMovies} />
+				)}
 
-				{serialIsError
-					? serialErrorBlock
-					: popularSerials.length > 0 && (
-							<VideoList title='popular serials' type='serials' url='#' data={popularSerials} />
-					  )}
+				{!movieIsError && !loadingMovies && (
+					<VideoList title='popular movies' type='movies' url='#' data={popularMovies} loading={loadingMovies} />
+				)}
+
+				{!serialIsError && !loadingSerials && (
+					<VideoList title='new serials' type='serials' url='#' data={newSerials} loading={loadingSerials} />
+				)}
+
+				{!serialIsError && !loadingSerials  && (
+					<VideoList title='popular serials' type='serials' url='#' data={popularSerials} loading={loadingSerials} />
+				)}
 
 				{/* <VideoList title='channel' type='channels' url='#' /> */}
 			</div>
