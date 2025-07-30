@@ -3,6 +3,7 @@
 	display: flex;
 	flex: 0 0 clamp(111px, 20vw, 231px);
 	height: auto;
+	border-radius: 8px;
 	cursor: pointer;
 	overflow: hidden;
 	scroll-snap-align: center;

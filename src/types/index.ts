@@ -47,7 +47,7 @@ export interface SerialPreviews {
 	is_popular: boolean
 }
 
-export interface ChanelPreview {
+export interface Chanel {
 	id: string
 	description: string
 	logo: string

@@ -3,14 +3,14 @@ import { useEffect, useRef, useState } from 'react'
 import Video from '../../../../components/Video/Video'
 import Channel from '../../../../components/Channel/Channel'
 
-import { MoviePreviews, SerialPreviews } from '../../../../types/index'
+import { MoviePreviews, SerialPreviews, Chanel } from '../../../../types/index'
 
 import styles from './VideoList.module.css'
 
 interface VideoListProps {
 	title: string
 	url?: string
-	data: (MoviePreviews | SerialPreviews)[]
+	data: (MoviePreviews | SerialPreviews | Chanel)[]
 	type: 'movies' | 'serials' | 'channels'
 	loading: boolean
 }
@@ -168,7 +168,19 @@ const VideoList = ({ title, url, data, type, loading }: VideoListProps) => {
 								}
 
 								if (type === 'channels') {
-									return <Channel key={item.id} />
+									return (
+										<Channel
+											key={item.id}
+											data={item as Chanel}
+											myRef={
+												index === 0
+													? (el: HTMLDivElement | null) => {
+															videoRef.current = el
+													  }
+													: undefined
+											}
+										/>
+									)
 								}
 							})}
 						</div>

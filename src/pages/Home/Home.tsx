@@ -1,7 +1,7 @@
 import Slider from './components/Slider/Slider'
 import VideoList from './components/VideoList/VideoList'
 
-import { ChanelPreview, MoviePreviews, SerialPreviews } from '../../types/index'
+import { Chanel, MoviePreviews, SerialPreviews } from '../../types/index'
 
 import { useMoviePreviews } from '../../hooks/useMoviePreviews'
 import { useSerialPreviews } from '../../hooks/useSerialPreviews'
@@ -35,15 +35,11 @@ const Home = () => {
 
 	const { newChanels, popularChanels } = useMemo(
 		() => ({
-			newChanels: dataChanelPrev.filter((chanel: ChanelPreview) => chanel.is_new),
-			popularChanels: dataChanelPrev.filter((chanel: ChanelPreview) => chanel.is_recommended)
+			newChanels: dataChanelPrev.filter((chanel: Chanel) => chanel.is_new),
+			popularChanels: dataChanelPrev.filter((chanel: Chanel) => chanel.is_recommended)
 		}),
 		[dataChanelPrev]
 	)
-
-
-
-	console.log(newChanels, popularChanels, chanelIsError)
 
 	return (
 		<>
@@ -65,11 +61,17 @@ const Home = () => {
 					<VideoList title='new serials' type='serials' url='#' data={newSerials} loading={loadingSerials} />
 				)}
 
-				{!serialIsError && !loadingSerials  && (
+				{!serialIsError && !loadingSerials && (
 					<VideoList title='popular serials' type='serials' url='#' data={popularSerials} loading={loadingSerials} />
 				)}
 
-				{/* <VideoList title='channel' type='channels' url='#' /> */}
+				{!chanelIsError && !loadingChannels && (
+					<VideoList title='recommended chanels' type='channels' data={popularChanels} loading={loadingChannels} />
+				)}
+
+				{!chanelIsError && !loadingChannels && (
+					<VideoList title='new chanels' type='channels' data={newChanels} loading={loadingChannels} />
+				)}
 			</div>
 		</>
 	)
