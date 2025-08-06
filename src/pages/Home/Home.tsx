@@ -44,7 +44,7 @@ const Home = () => {
 	return (
 		<>
 			<Slider />
-			<div className={styles.videoWrap}>
+			<section className={styles.videoWrap}>
 				{loadingMovies && loadingSerials && loadingChannels && <p>Загрузка...</p>}
 
 				{movieIsError && serialIsError && chanelIsError && <p>Произошла ошибка загрузки данных</p>}
@@ -72,7 +72,7 @@ const Home = () => {
 				{!chanelIsError && !loadingChannels && (
 					<VideoList title='new chanels' type='channels' data={newChanels} loading={loadingChannels} />
 				)}
-			</div>
+			</section>
 		</>
 	)
 }
