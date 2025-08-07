@@ -1,6 +1,41 @@
 .previewWrap {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	flex: 0 0 clamp(115px, 20vw, 260px);
+	height: auto;
+	border-radius: 12px;
+	overflow: hidden;
+	cursor: pointer;
 }
+
+.poster {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+.logo {
+	position: absolute;
+	top: 40%;
+	right: 0;
+	width: clamp(57px, 10vw, 130px);
+	height: auto;
+}
+
 .descriptionWrap {
+	position: absolute;
+	display: none;
 }
 .description {
+	position: absolute;
+}
+
+.previewProgram {
+	display: inline-block;
+	max-width: 50%;
+	position: absolute;
+	font-size: clamp(10px, 10vw, 20px);;
+	font-weight: 500;
+	line-height: 146%;
 }

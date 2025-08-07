@@ -1,8 +1,11 @@
+import { useEffect, useState } from 'react'
+
 import ButtonLink from '../ButtonLink/ButtonLink'
+import PreviewProgram from './components/PreviewProgram/PreviewProgram'
 
 import { Chanel } from '../../types'
+
 import styles from './Channel.module.css'
-import PreviewProgram from './components/PreviewProgram/PreviewProgram'
 
 interface ChannelProps {
 	data: Chanel
@@ -10,13 +13,37 @@ interface ChannelProps {
 }
 
 const Channel = ({ data, myRef }: ChannelProps) => {
+	const [isMobile, setIsMobile] = useState<boolean>(false)
+
+	useEffect(() => {
+		function handleResize() {
+			setIsMobile(window.innerWidth <= 768)
+		}
+
+		handleResize()
+
+		window.addEventListener('resize', handleResize)
+
+		return () => {
+			window.removeEventListener('resize', handleResize)
+		}
+	}, [])
+
 	return (
 		<div className={styles.previewWrap} ref={myRef}>
-			<img src={data.nowFilmPoster} alt={data.showingNow} />
-			<img src={data.logo} alt={data.name} />
+			<img src={data.nowFilmPoster} alt={data.showingNow} className={styles.poster} />
+			<img src={data.logo} alt={data.name} className={styles.logo} />
 
-			<PreviewProgram title='Showing now' programName={data.showingNow} />
-			<PreviewProgram title='Up next' programName={data.upNext} />
+			<PreviewProgram
+				title={!isMobile ? 'Showing now' : 'Now'}
+				programName={data.showingNow}
+				customClass={styles.previewProgram}
+			/>
+			<PreviewProgram
+				title={!isMobile ? 'Up next' : 'Next'}
+				programName={data.upNext}
+				customClass={styles.previewProgram}
+			/>
 
 			<div className={styles.descriptionWrap}>
 				<p className={styles.description}>{data.description}</p>

@@ -1,15 +1,16 @@
-import styles from './previewProgram.module.css'
+// import { CSSProperties } from "react"
 
 interface PreviewProgramProps {
 	title: string
 	programName: string
+	customClass: string
 }
 
-const PreviewProgram = ({ title, programName }: PreviewProgramProps) => {
+const PreviewProgram = ({ title, programName, customClass }: PreviewProgramProps) => {
 	return (
-		<div className={styles.previewWrapper}>
-			<p className={styles.title}>{title}</p>
-			<p className={styles.name}>{programName}</p>
+		<div className={customClass}>
+			<p>{title}</p>
+			<p>{programName}</p>
 		</div>
 	)
 }
