@@ -8,10 +8,21 @@
 	overflow: hidden;
 	scroll-snap-align: center;
 	transition: transform 0.3s ease-in-out;
+	transform-origin: center center;
+	z-index: 1;
+
+	&:first-child {
+		transform-origin: left center;
+	}
+
+	&:last-child {
+		transform-origin: right center;
+	}
 
 	@media (hover: hover) {
 		&:hover {
 			transform: scale(1.1);
+			z-index: 10;
 
 			& .description {
 				transform: translateY(1%);

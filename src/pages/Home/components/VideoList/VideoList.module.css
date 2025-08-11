@@ -64,9 +64,10 @@
 }
 
 .videosInner {
+	position: relative;
 	margin: 0 clamp(12px, 3.5vw, 65px);
 	padding: 20px 0;
-	overflow: hidden;
+	overflow: visible;
 	scroll-snap-type: x mandatory;
 	scrollbar-width: none;
 	-ms-overflow-style: none;
